@@ -10,7 +10,6 @@
 #define sete 0x07
 #define oito 0x7F
 #define nove 0x67
-#define clear 0x00
 
 void delay_ms(unsigned int ms)
 {
@@ -21,36 +20,36 @@ void delay_ms(unsigned int ms)
 }
 int main()
 {
-    unsigned char num[] = {zero, um, dois, tres, quatro, cinco, seis, sete, oito, nove};
+    unsigned char num[10] = {zero, um, dois, tres, quatro, cinco, seis, sete, oito, nove};
     unsigned char i, j = 0;
     DDRC = 0x00;
     DDRB = 0x03;
     
     for(i =  0; i < 6; i++)
     {
-        DDRC = clear;
-        delay_ms(35);
-        DDRC = dois;
-        delay_ms(35);
+        PORTC = 0x5B;
+        delay_ms(100);
+        PORTC = 0x00;
+        delay_ms(100);
     }
     while(1)
     {
-        if(DDRBbits.RB0)
+        if(PORTBbits.RB0)
         {
             delay_ms(100);
-            if(DDRBbits.RB0)
+            if(PORTBbits.RB0)
             {
                 j == 9? 0: j++;
-                DDRC = num[j];
+                PORTC = num[j];
             }
         }
-        if(!DDRBbits.RB1)
+        if(!PORTBbits.RB1)
         {
             delay_ms(100);
-            if(!DDRBbits.RB1)
+            if(!PORTBbits.RB1)
             {
                 j == 0? 9: j--;
-                DDRC = num[j];
+                PORTC = num[j];
             }
         }
         delay_ms(35);
