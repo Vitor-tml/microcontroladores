@@ -22,14 +22,16 @@ int main()
 {
     unsigned char num[10] = {zero, um, dois, tres, quatro, cinco, seis, sete, oito, nove};
     unsigned char i, j = 0;
-    DDRC = 0x00;
+    ADCON0bits.ADON = 0;
+    ADCON1 = 0xff;
+    DDRD = 0x00;
     DDRB = 0x03;
     
     for(i =  0; i < 6; i++)
     {
-        PORTC = 0x5B;
+        PORTD = 0x5B;
         delay_ms(100);
-        PORTC = 0x00;
+        PORTD = 0x00;
         delay_ms(100);
     }
     while(1)
@@ -40,7 +42,7 @@ int main()
             if(PORTBbits.RB0)
             {
                 j == 9? 0: j++;
-                PORTC = num[j];
+                PORTD = num[j];
             }
         }
         if(!PORTBbits.RB1)
@@ -49,10 +51,10 @@ int main()
             if(!PORTBbits.RB1)
             {
                 j == 0? 9: j--;
-                PORTC = num[j];
+                PORTD = num[j];
             }
         }
-        delay_ms(35);
+        delay_ms(205);
     }
 }
 
