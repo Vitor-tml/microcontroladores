@@ -32,7 +32,7 @@ void INT()
     if(FT)
     {
         contimer++;
-            if(contimer == 0)
+            if(contimer == 200)
             {
                 contimer = 0;
                 if(duty == 1020)
